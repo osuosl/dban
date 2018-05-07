@@ -35,7 +35,7 @@ case "${BR2_ARCH}" in
 		MKISOFS_ARGS+=(-V "$VOLUME")
 		ISOHYBRID=1
 	;;
-	powerpc)
+	powerpc|powerpc64)
 		test ! -r "$INDIR/ppc/yaboot" && echo "$0: $INDIR/ppc/yaboot is missing." && exit 3
 		MKISOFS_ARGS+=(-chrp-boot -hfs -no-cache-inodes -no-desktop -part -r)
 		MKISOFS_ARGS+=(-map "$OUTDIR/ppc/map")

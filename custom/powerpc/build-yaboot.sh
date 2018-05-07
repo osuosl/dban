@@ -2,9 +2,9 @@
 set -e
 
 . ../../environment.sh
-if [ "$BR2_ARCH" != "powerpc" ]; then
+if [ "$BR2_ARCH" != "powerpc" || "$BR2_ARCH" != "powerpc64"]; then
 	echo "buildroot is configured for the wrong architecture"
-	echo "Must be powerpc, NOT $BR2_ARCH"
+	echo "Must be powerpc or powerpc64, NOT $BR2_ARCH"
 	exit 1
 fi
 
