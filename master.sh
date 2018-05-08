@@ -35,10 +35,19 @@ case "${BR2_ARCH}" in
 		MKISOFS_ARGS+=(-V "$VOLUME")
 		ISOHYBRID=1
 	;;
-	powerpc|powerpc64)
+	powerpc)
 		test ! -r "$INDIR/ppc/yaboot" && echo "$0: $INDIR/ppc/yaboot is missing." && exit 3
 		MKISOFS_ARGS+=(-chrp-boot -hfs -no-cache-inodes -no-desktop -part -r)
 		MKISOFS_ARGS+=(-map "$OUTDIR/ppc/map")
+		MKISOFS_ARGS+=(-hfs-bless "$OUTDIR/ppc")
+		MKISOFS_ARGS+=(-hfs-volid "$VOLUME")
+
+		BR2_BZIMAGE="buildroot/output/images/zImage"
+		BZIMAGE_DIR=ppc
+	powerpc64)
+		test ! -r "$INDIR/boot/grub/powerpc-ieee1275/core.elf" && echo "$0: $INDIR/boot/grub/powerpc-ieee1275/core.elf is missing." && exit 3
+		MKISOFS_ARGS+=(-chrp-boot -no-cache-inodes -no-desktop -part -r)
+		MKISOFS_ARGS+=(-map "$OUTDIR/ppc/mapping")
 		MKISOFS_ARGS+=(-hfs-bless "$OUTDIR/ppc")
 		MKISOFS_ARGS+=(-hfs-volid "$VOLUME")
 
